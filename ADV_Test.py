@@ -1,4 +1,4 @@
-a = 1
-print(type(a))
+a = "awabaf"
+print(a[-3:])
 
 
