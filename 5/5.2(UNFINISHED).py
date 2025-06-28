@@ -1,10 +1,10 @@
 from Classes import Student,Teacher,TeachingAssistant
 
-s = Student("Nam", 20, "SV123", "Computer Science")
+s = Student(student_id="SV123", major="Computer Science", name="Nam", age=20)
 print(s.introduce())
 
-t = Teacher("Cô Hương", 35, "GV456", "Mathematics")
+t = Teacher(teacher_id="GV456", subject="Mathematics", name="Cô Hương", age=35)
 print(t.introduce())
 
-ta = TeachingAssistant("An", 22, "SV456", "Computer Science", "Programming 101")
+ta = TeachingAssistant(name="An", age=22, student_id="SV456", major="Computer Science", subject="Programming 101")
 print(ta.introduce())

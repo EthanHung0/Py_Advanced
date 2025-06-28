@@ -40,26 +40,31 @@ class Person:
         return f"My name is {self.name}, im {self.age} years old. "
 
 class Student(Person):
-    def __init__(self, name, age, student_id, major):
-        super().__init__(name, age)
+    def __init__(self, student_id, major, **kwargs):
+        super().__init__(**kwargs)
         self.student_id = student_id
         self.major = major
     def introduce(self):
         return super().introduce() + f"ID {self.student_id}, I major in {self.major}"
 
 class Teacher(Person):
-    def __init__(self, name, age, teacher_id, subject):
-        super().__init__(name, age)
+    def __init__(self, teacher_id, subject, **kwargs):
+        super().__init__(**kwargs)
         self.teacher_id = teacher_id
         self.subject = subject
     def introduce(self):
         return super().introduce() + f"ID {self.teacher_id}, I teach {self.subject}"
 
-class TeachingAssistant(Student,Teacher):
-    def __init__(self, name, age, student_id, major, teacher_id, subject):
-        dummy_id = "123123"
-        Student.__init__(self, name, age, student_id, major)
-        Teacher.__init__(self, name, age, subject, dummy_id)
+class TeachingAssistant(Student, Teacher):
+    def __init__(self, name, age, student_id, major, subject):
+        super().__init__(
+            name=name,
+            age=age,
+            student_id=student_id,
+            major=major,
+            teacher_id="TA123", #dummy
+            subject=subject
+        )
     def introduce(self):
         return super().introduce() + f"and a teaching assistant for the course {self.subject}"
 
