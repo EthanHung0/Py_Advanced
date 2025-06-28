@@ -28,3 +28,38 @@ class Magazine(Item):
         self.issue = issue
     def get_info(self):
         return f"[ID: {self.id}] Title: {self.title} | Author: {self.author} | Issue: #{self.issue}"
+
+#===================================================================================================
+
+#Hierarchical inheritance
+class Person:
+    def __init__(self,name,age):
+        self.name = name
+        self.age = age
+    def introduce(self):
+        return f"My name is {self.name}, im {self.age} years old. "
+
+class Student(Person):
+    def __init__(self, name, age, student_id, major):
+        super().__init__(name, age)
+        self.student_id = student_id
+        self.major = major
+    def introduce(self):
+        return super().introduce() + f"ID {self.student_id}, I major in {self.major}"
+
+class Teacher(Person):
+    def __init__(self, name, age, teacher_id, subject):
+        super().__init__(name, age)
+        self.teacher_id = teacher_id
+        self.subject = subject
+    def introduce(self):
+        return super().introduce() + f"ID {self.teacher_id}, I teach {self.subject}"
+
+class TeachingAssistant(Student,Teacher):
+    def __init__(self, name, age, student_id, major, teacher_id, subject):
+        dummy_id = "123123"
+        Student.__init__(self, name, age, student_id, major)
+        Teacher.__init__(self, name, age, subject, dummy_id)
+    def introduce(self):
+        return super().introduce() + f"and a teaching assistant for the course {self.subject}"
+

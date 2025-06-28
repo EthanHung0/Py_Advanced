@@ -1,13 +1,13 @@
 from guizero import *
-import Classes
+from Classes import Book,DVD,Magazine
 
 stuff = [
-    Classes.Book("B001","AIUEO","SomeJPGuy",150),
-    Classes.DVD("D002","SieuNhanGao","holysh",7200),
-    Classes.Magazine("M003","ThangSau","nxbongod",12),
-    Classes.Book("B002","Lập trình Python","Nguyễn Văn A",320),
-    Classes.DVD("D101","Học Python qua phim","Lê Thị B",5400),
-    Classes.Magazine("M301","Công nghệ hôm nay","Trần C",45)
+    Book("B001","AIUEO","SomeJPGuy",150),
+    DVD("D002","SieuNhanGao","holysh",7200),
+    Magazine("M003","ThangSau","nxbongod",12),
+    Book("B002","Lập trình Python","Nguyễn Văn A",320),
+    DVD("D101","Học Python qua phim","Lê Thị B",5400),
+    Magazine("M301","Công nghệ hôm nay","Trần C",45)
 ]
 
 StorageApp = App("The Storage",1000,700)
@@ -101,11 +101,11 @@ def Add():
 
         try:
             if New_type.value == "Book" and filled(New_pages) and is_num(New_pages.value):
-                stuff.append(Classes.Book(f"B{id_val}",title_val,author_val,int(New_pages.value)))
+                stuff.append(Book(f"B{id_val}",title_val,author_val,int(New_pages.value)))
             elif New_type.value == "DVD" and filled(New_duration) and is_num(New_duration.value):
-                stuff.append(Classes.DVD(f"D{id_val}",title_val,author_val,int(New_duration.value)))
+                stuff.append(DVD(f"D{id_val}",title_val,author_val,int(New_duration.value)))
             elif New_type.value == "Magazine" and filled(New_issue) and is_num(New_issue.value):
-                stuff.append(Classes.Magazine(f"M{id_val}",title_val,author_val,int(New_issue.value)))
+                stuff.append(Magazine(f"M{id_val}",title_val,author_val,int(New_issue.value)))
             Display_Sort("A")
             NewItem.destroy()
         except Exception as e:
