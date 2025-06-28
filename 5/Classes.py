@@ -66,5 +66,6 @@ class TeachingAssistant(Student, Teacher):
             subject=subject
         )
     def introduce(self):
-        return super().introduce() + f"and a teaching assistant for the course {self.subject}"
+        return f"My name is {self.name}, im {self.age} years old. ID {self.student_id}, I major in {self.major} and a teaching assistant for the course {self.subject}"
+
 
