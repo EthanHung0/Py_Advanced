@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 import math
+import time
 
 class Vehicle(ABC):
     @abstractmethod
@@ -202,5 +203,56 @@ class StreamingPlayer(MediaPlayer):
 
 #==================================================================================================
 
+class Plugin(ABC):
+    #load(), execute(), unload().
+    @abstractmethod
+    def load(self):
+        pass
+    @abstractmethod
+    def execute(self):
+        pass
+    @abstractmethod
+    def unload(self):
+        pass
+
+class SpellCheckPlugin(Plugin):
+    def load(self):
+        print("[SpellCheck] Loading spell checker resources...")
+        time.sleep(0.5)
+        print("[SpellCheck] Spell checker loaded in.")
+    def execute(self):
+        print("[SpellCheck] Checking document...")
+        time.sleep(0.5)
+        print("[SpellCheck] Spell check complete.")
+    def unload(self):
+        print("[SpellCheck] Unloading spell checker resources...")
+        time.sleep(0.5)
+        print("[SpellCheck] Spell checker unloaded.")
+
+class AutoSavePlugin(Plugin):
+    def load(self):
+        print("[AutoSave] Initializing autosave timer...")
+        time.sleep(0.5)
+        print("[AutoSave] Autosave ready.")
+    def execute(self):
+        print("[AutoSave] Document autosaved.")
+    def unload(self):
+        print("[AutoSave] Shutting down autosave features...")
+        time.sleep(0.5)
+        print("[AutoSave] Autosave unloaded.")
+
+class PluginManager():
+    plugins = []
+    def register(self,plugin:Plugin):
+        if not isinstance(plugin,Plugin):
+            raise TypeError("Registering plugin must inherit from Plugin.")
+        self.plugins.append(plugin)
+        print(f"Plugin {plugin.__class__.__name__} has been registered")
+    def run_all(self):
+        print("\n----------Running all Plugins----------")
+        for p in self.plugins:
+            p.load()
+            p.execute()
+            p.unload()
 
 
