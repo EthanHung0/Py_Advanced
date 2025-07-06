@@ -1,4 +1,5 @@
 from .payment_method import PaymentMethod
+import time
 
 class CreditCard(PaymentMethod):
     def __init__(self, username):
@@ -38,6 +39,7 @@ class CreditCard(PaymentMethod):
             return False
         return True
 
+
     def pay(self, amount):
         if not isinstance(amount, (int, float)) or amount <= 0:
             print("Invalid amount input.")
@@ -46,6 +48,7 @@ class CreditCard(PaymentMethod):
             self._balance -= amount
             return True
         return False
+
 
     # def pay(self, amount):
     #     if self.__authentication:
