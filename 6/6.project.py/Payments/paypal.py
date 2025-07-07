@@ -3,8 +3,8 @@ import re
 
 
 class PayPal(PaymentMethod):
-    def __init__(self, username, balance):
-        super().__init__(username, balance)
+    def __init__(self, username):
+        super().__init__(username)
         self._email = None
         self._password = None
         # self.__authentication = False
@@ -27,8 +27,8 @@ class PayPal(PaymentMethod):
         self._password = password
 
     def authenticate(self):
-        email_pattern = r'^[\w\.-]+@[\w\.-]+\.\w+$'
-        if not (re.match(self._email,email_pattern) and len(self._password) >= 8):
+        email_pattern = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
+        if not (re.match(email_pattern,self._email) and len(self._password) >= 8):
             print("Invalid Email/Password.")
             return False
         return True

@@ -1,8 +1,8 @@
 from .payment_method import PaymentMethod
 
 class CryptoWallet(PaymentMethod):
-    def __init__(self, username, balance):
-        super().__init__(username, balance)
+    def __init__(self, username):
+        super().__init__(username)
         self._private_key = None
         self._wallet_address = None
         # self.__authentication = False
@@ -13,11 +13,10 @@ class CryptoWallet(PaymentMethod):
     @wallet_address.setter
     def wallet_address(self,address):
         if not isinstance(address,str):
-            print("Wallet address input must be a string!")
-            return
+            # print("Wallet address input must be a string!")
+            return False
         if not(address.startswith("0x") and len(address) == 14):
-            print("Invalid private key input. (must start with 0x and exactly 14 characters long)")
-            return
+            return False
         self._wallet_address = address
     @property
     def private_key(self):
@@ -25,8 +24,8 @@ class CryptoWallet(PaymentMethod):
     @private_key.setter
     def private_key(self,key):
         if not isinstance(key,str):
-            print("Private key input must be a string!")
-            return
+            # print("Private key input must be a string!")
+            return False
         self._private_key = key
 
     def authenticate(self):

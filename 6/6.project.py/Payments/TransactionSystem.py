@@ -2,6 +2,7 @@ from Payments.credit_card import CreditCard
 from Payments.crypto_wallet import CryptoWallet
 from Payments.paypal import PayPal
 import time
+import datetime
 
 
 class TransactionSystem:
@@ -11,6 +12,8 @@ class TransactionSystem:
 
     def add_method(self):
         add_username = input("Input Username: ")
+        while not add_username:
+            add_username = input("Input Username: ")
         print("Choose a Payment method: ")
         print("1. Credit Card.")
         print("2. PayPal.")
@@ -22,8 +25,8 @@ class TransactionSystem:
             print("Invalid balance input.")
             return
         if add_choice == '1':
-            add_cardnum = input("Input Card Number: ")
-            add_cvv = input("Input Card's CVV: ")
+            add_cardnum = input("Input Card Number (exactly 16 digits): ")
+            add_cvv = input("Input Card's CVV (exactly 4 digits): ")
             new_method = CreditCard(add_username)
             new_method.balance = add_bal
             new_method.card_number = add_cardnum
@@ -35,9 +38,12 @@ class TransactionSystem:
                 return
             print("Authentication Successful.")
             self._methods.append(new_method)
+
         elif add_choice == '2':
-            add_email = input("Input Paypal Email: ")
-            add_password = input("Input User Password: ")
+            add_email = input("""Paypal Email:
+Example: ✅user@example.com, ✅john.doe@sub.domain.co.uk, ❌user@domain..com, ❌@example.com
+Input Paypal Email:  """)
+            add_password = input("Input User Password (8 or more digits): ")
             new_method = PayPal(add_username)
             new_method.balance = add_bal
             new_method.email = add_email
@@ -49,22 +55,25 @@ class TransactionSystem:
                 return
             print("Authentication Successful.")
             self._methods.append(new_method)
+
         elif add_choice == '3':
-            add_walletaddress = input("Input Wallet Address: ")
-            add_privatekey = input("Input Private Key")
+            add_walletaddress = input("Input Wallet Address (start with 0x, exactly 14 characters long) (Example: 0xA1B2c3D4e5F6): ")
+            add_privatekey = input("Input Private Key: ")
             new_method = CryptoWallet(add_username)
             new_method.balance = add_bal
             new_method.wallet_address = add_walletaddress
             new_method.private_key = add_privatekey
             print("Entering Authentication details...")
             time.sleep(0.5)
-            if not new_method.authenticate():
+            if not all([new_method.wallet_address,new_method.private_key]):
+                print("Invalid wallet address/private key input.")
                 print("Authentication Failed.")
                 return
             print("Authentication Successful.")
             self._methods.append(new_method)
         else:
             print("Invalid choice.")
+        time.sleep(0.5)
 
 
     def _show_methods(self):
@@ -107,6 +116,9 @@ class TransactionSystem:
         time.sleep(0.5)
         if method.pay(amount):
             print("Transaction completed.")
+            print("Logging transaction to log.txt...")
+            self.log_transaction(method,amount)
+            time.sleep(0.5)
             print(f"Remaining balance: {method.check_bal()}")
         else:
             print("Transaction failed.")
@@ -120,3 +132,7 @@ class TransactionSystem:
             return
         for method in self._methods:
             print(f"{type(method).__name__} ({method.username}): {method.method.check_bal()}")
+
+    def log_transaction(self,method,amount):
+        with open("log.txt","a") as l:
+            l.write(f"{datetime.now()} | {type(method).__name__} | User: {method.user_name} | Amount: {amount}\n")
