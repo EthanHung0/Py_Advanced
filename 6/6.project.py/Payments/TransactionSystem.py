@@ -103,8 +103,9 @@ Input Paypal Email:  """)
             print("Invalid choice.")
             return
 
-        print("Checking Authentication...")
+        print("Validating Authentication...")
         time.sleep(0.5)
+        print("Authentication Valid.")
 
         try:
             amount = float(input("Enter payment amount: "))
@@ -131,8 +132,8 @@ Input Paypal Email:  """)
             time.sleep(0.5)
             return
         for method in self._methods:
-            print(f"{type(method).__name__} ({method.username}): {method.method.check_bal()}")
+            print(f"{type(method).__name__} ({method.username}): {method.check_bal()}")
 
     def log_transaction(self,method,amount):
         with open("log.txt","a") as l:
-            l.write(f"{datetime.now()} | {type(method).__name__} | User: {method.user_name} | Amount: {amount}\n")
+            l.write(f"{datetime.datetime.now()} | {type(method).__name__} | User: {method.username} | Amount: {amount}\n")
