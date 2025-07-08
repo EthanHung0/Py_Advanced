@@ -1,8 +1,8 @@
 from Payments.credit_card import CreditCard
 from Payments.crypto_wallet import CryptoWallet
 from Payments.paypal import PayPal
+from datetime import datetime as dt_time
 import time
-import datetime
 
 
 class TransactionSystem:
@@ -131,8 +131,8 @@ Input Paypal Email:  """)
             time.sleep(0.5)
             return
         for method in self._methods:
-            print(f"{type(method).__name__} ({method.username}): {method.method.check_bal()}")
+            print(f"{type(method).__name__} ({method.username}): {method.check_bal()}")
 
     def log_transaction(self,method,amount):
         with open("log.txt","a") as l:
-            l.write(f"{datetime.now()} | {type(method).__name__} | User: {method.user_name} | Amount: {amount}\n")
+            l.write(f"{dt_time.now()} | {type(method).__name__} | User: {method.username} | Amount: {amount}\n")

@@ -1,5 +1,4 @@
 from .payment_method import PaymentMethod
-import time
 
 class CreditCard(PaymentMethod):
     def __init__(self, username):
