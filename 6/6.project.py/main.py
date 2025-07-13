@@ -19,7 +19,6 @@ def main():
 
         if choice == '1':
             system.add_method()
-
         elif choice == '2':
             system.make_payment()
         elif choice == '3':
