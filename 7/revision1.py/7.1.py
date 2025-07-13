@@ -21,12 +21,13 @@ def main():
         if choice == '1':
             system.add_CB()
         elif choice == '2':
-            system.remove_CB()
+            remove_name = input("Nhập tên cần tìm: ")
+            system.remove_CB(remove_name)
         elif choice == '3':
             system.show_all()
         elif choice == "4":
-            name = input("Nhập tên cần tìm: ")
-            system.find_CB(name)
+            find_name = input("Nhập tên cần tìm: ")
+            system.find_CB(find_name)
         elif choice == "5":
             save_name = input("Nhập tên file lưu danh sách cán bộ: ")
             system.save(save_name)
@@ -34,7 +35,7 @@ def main():
             system.load()
         elif choice == '7':
             print("Đang tắt hệ thống...")
-            time.sl
+            time.sleep(0.5)
             break
         else:
             print("Invalid choice.")

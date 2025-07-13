@@ -22,11 +22,9 @@ class QLCB:
         elif CB_type in ["ks","kỹ sư"]:
             new_industry = input("Ngành đào tạo: ")
             newCB = KySu(new_name,new_address,new_industry)
-            newCB.industry = new_industry
         elif CB_type in ["nv","nhân viên"]:
             new_position = input("Công việc: ")
             newCB = NhanVien(new_name,new_address,new_position)
-            newCB.position = new_position
         else:
             print("Loại cán bộ không hợp lệ.")
             return
@@ -38,6 +36,7 @@ class QLCB:
             if CB_type in ["cn","công nhân"]:
                 if not newCB.grade:
                     print("Đăng ký cán bộ mới thất bại.")
+                    return
             self.CB_List.append(newCB)
             self._SortByType()
             print("Đăng ký cán bộ mới thành công.")
@@ -70,7 +69,7 @@ class QLCB:
         self.CB_List.sort(key=lambda cb: \
                             0 if isinstance(cb,CongNhan) \
                                 else (1 if isinstance(cb,KySu) \
-                                    else 3))
+                                    else 2))
 
 
     def show_all(self):
@@ -88,7 +87,7 @@ class QLCB:
         found = False
         for CB in self.CB_List:
             if CB.name.lower() == findname.lower():
-                self.CB_List
+                self.CB_List.remove(CB)
                 found = True
                 print("")
         if not found:
@@ -99,7 +98,7 @@ class QLCB:
         if not file_name.endswith(".dat"):
             file_name += ".dat"
         try:
-            with open(file_name,mode="wb",encoding="utf-8") as f:
+            with open(file_name,mode="wb") as f:
                 pickle.dump(self.CB_List,f)
         except Exception as e:
             print(f"Lỗi khi lưu file: {e}.")
@@ -127,7 +126,7 @@ class QLCB:
             return
 
         try:
-            with open(file_name,mode="rb",encoding="utf-8") as a:
+            with open(file_name,mode="rb") as a:
                 self.CB_List = pickle.load(a)
             print(f"Đang tải danh sách từ {file_name}...")
             time.sleep(0.5)

@@ -8,6 +8,10 @@ class CanBo(ABC):
         self._address = address
 
     @property
+    def name(self):
+        return self._name
+
+    @property
     def age(self):
         return self._age
     @age.setter
@@ -16,7 +20,7 @@ class CanBo(ABC):
             age = int(age)
         except ValueError:
             return False
-        if 0 > age > 100:
+        if age <= 0 or age > 100:
             print("Invalid age.")
             return False
         self._age = age
@@ -31,6 +35,7 @@ class CanBo(ABC):
             print("Invalid gender.")
             return False
         self._gender = gender
+
     @abstractmethod
     def show_info(self):
         pass
@@ -56,7 +61,16 @@ class CongNhan(CanBo):
         self._grade = grade
 
     def show_info(self):
-        return f"Tên: {self._name} | Tuổi: {self._age} | Giới tính: {self._gender} | Địa chỉ: {self._address} | Bậc {self._grade}"
+        info = f"Tên: {self._name}"
+        if self._age is not None:
+            info += f" | Tuổi: {self._age}"
+        if self._gender:
+            info += f" | Giới tính: {self._gender.title()}"
+        if self._address:
+            info += f" | Địa chỉ: {self._address}"
+        if self._grade is not None:
+            info += f" | Bậc: {self._grade}"
+        return info
 
 
 class KySu(CanBo):
@@ -65,7 +79,16 @@ class KySu(CanBo):
         self._industry = industry #nganh dao tao
 
     def show_info(self):
-        return f"Tên: {self._name} | Tuổi: {self._age} | Giới tính: {self._gender} | Địa chỉ: {self._address} | Ngành đào tạo: {self._industry}"
+        info = f"Tên: {self._name}"
+        if self._age is not None:
+            info += f" | Tuổi: {self._age}"
+        if self._gender:
+            info += f" | Giới tính: {self._gender.title()}"
+        if self._address:
+            info += f" | Địa chỉ: {self._address}"
+        if self._industry:
+            info += f" | Ngành đào tạo: {self._industry}"
+        return info
 
 
 class NhanVien(CanBo):
@@ -74,4 +97,13 @@ class NhanVien(CanBo):
         self._position = position #cong viec
 
     def show_info(self):
-        return f"Tên: {self._name} | Tuổi: {self._age} | Giới tính: {self._gender} | Địa chỉ: {self._address} | Công việc: {self._position}"
+        info = f"Tên: {self._name}"
+        if self._age is not None:
+            info += f" | Tuổi: {self._age}"
+        if self._gender:
+            info += f" | Giới tính: {self._gender.title()}"
+        if self._address:
+            info += f" | Địa chỉ: {self._address}"
+        if self._position:
+            info += f" | Công việc: {self._position}"
+        return info
