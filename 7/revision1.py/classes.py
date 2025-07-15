@@ -98,7 +98,7 @@ class NhanVien(CanBo):
 
     def show_info(self):
         info = f"Tên: {self._name}"
-        if self._age is not None:
+        if self._age:
             info += f" | Tuổi: {self._age}"
         if self._gender:
             info += f" | Giới tính: {self._gender.title()}"
