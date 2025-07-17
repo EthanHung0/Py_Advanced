@@ -6,7 +6,7 @@ class KhuPho:
     def __init__(self):
         self.household_list = []
 
-    def add_household(self,hh:HoGiaDinh):
+    def _add_household(self,hh:HoGiaDinh):
         self.household_list.append(hh)
 
     def household_inputsys(self):
@@ -27,14 +27,9 @@ class KhuPho:
                 try:
                     new_age = int(input("| Tuổi: "))
                 except ValueError:
-                    print("Lỗi, Vui lòng nhập số.")
-                    pass
-                if new_age < 0:
                     print("Lỗi, Tuổi không hợp lệ.")
                     pass
-                elif new_age < 24:
-                    new_job = input("| Nghề nghiệp (Nếu có): ")
-                    new_cmnd = input("| Số CMND: ")
+                if new_age < 24:
                     if new_age > 14:
                         new_job = input("| Nghề nghiệp (Nếu có): ") or None
                         new_cmnd = input("| Số CMND: ").strip() or None
@@ -43,6 +38,7 @@ class KhuPho:
                     new_job = input("| Nghề nghiệp (Nếu có): ") or None
                     new_cmnd = input("| Số CMND: ")
                     ho.add_member(Older(new_name,new_age,new_cmnd,new_job))
+            self._add_household(ho)
 
     def show_all_info(self):
         print("Đang hiển thị các hộ trong khu...")

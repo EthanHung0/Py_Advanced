@@ -26,8 +26,12 @@ class Ca_Nhan(ABC):
         if not val:
             self._cmnd = None
             return
+        try:
+            int(val)
+        except ValueError:
+            raise ValueError("CMND không hợp lệ.")
         if val in Ca_Nhan._used_cmnds:
-            return False
+            raise ValueError(f"CMND '{val}' đã tồn tại.")
         self._cmnd = val #cho vào self._cmnd thay vì self.cmnd
         Ca_Nhan._used_cmnds.add(val)
 

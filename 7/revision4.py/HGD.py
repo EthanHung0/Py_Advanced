@@ -13,7 +13,7 @@ class HoGiaDinh:
     @house_num.setter
     def house_num(self,val):
         if not self._is_valid_house_number(val):
-            return False
+            raise ValueError("Số nhà không hợp lệ. Chỉ được chứa chữ, số, hoặc '/'.")
         self._house_num = val
 
 
