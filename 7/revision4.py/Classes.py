@@ -1,7 +1,7 @@
 from abc import ABC,abstractmethod
 
 class Ca_Nhan(ABC):
-    _used_cmnd = set()
+    _used_cmnds = set()
 
     def __init__(self,name,age,cmnd=None,job=None):
         self._name = name

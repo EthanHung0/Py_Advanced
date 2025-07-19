@@ -18,7 +18,7 @@ class HoGiaDinh:
 
 
     def add_member(self,nguoi:Ca_Nhan):
-        self.member_list.append(nguoi)
+        self._member_list.append(nguoi)
 
 
     def _is_valid_house_number(self,house_num):

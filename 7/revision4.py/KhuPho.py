@@ -29,15 +29,25 @@ class KhuPho:
                 except ValueError:
                     print("Lỗi, Tuổi không hợp lệ.")
                     pass
+                new_job = None
+                new_cmnd = None
                 if new_age < 24:
                     if new_age > 14:
                         new_job = input("| Nghề nghiệp (Nếu có): ") or None
                         new_cmnd = input("| Số CMND: ").strip() or None
-                    ho.add_member(Younger(new_name,new_age,new_cmnd,new_job))
+                    try:
+                        ho.add_member(Older(new_name, new_age, new_cmnd, new_job))
+                    except ValueError as e:
+                        print(f"Lỗi khi thêm thành viên: {e}")
+                        print("Bỏ qua thành viên này và tiếp tục.")
                 else:
                     new_job = input("| Nghề nghiệp (Nếu có): ") or None
                     new_cmnd = input("| Số CMND: ")
-                    ho.add_member(Older(new_name,new_age,new_cmnd,new_job))
+                    try:
+                        ho.add_member(Older(new_name, new_age, new_cmnd, new_job))
+                    except ValueError as e:
+                        print(f"Lỗi khi thêm thành viên: {e}")
+                        print("Bỏ qua thành viên này và tiếp tục.")
             self._add_household(ho)
 
     def show_all_info(self):

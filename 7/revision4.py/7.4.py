@@ -20,11 +20,9 @@ def main():
             system.show_all_info()
         elif choice == '3':
             find = input("Nhập CMND của người cần tìm trong khu phố: ")
-            try:
-                int(find)
-            except ValueError:
+            if not find.isdigit():
                 print("Số CMND không hợp lệ.")
-                return
+                continue
             system.large_scale_find(find)
         elif choice == '4':
             print("Đang thoát...")
