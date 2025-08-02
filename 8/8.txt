@@ -1,0 +1,6 @@
+Loại quan hệ            | Ý nghĩa                                                           | Biểu hiện trong Python
+------------------------------------------------------------------------------------------------------------------------------
+Association (Kết hợp)	| Một đối tượng biết về đối tượng khác	                            | Truyền làm đối số
+Aggregation (Tổng hợp)	| Một đối tượng có đối tượng khác, nhưng không kiểm soát vòng đời	| Gán từ bên ngoài
+Composition (Cấu thành)	| Một đối tượng sở hữu đối tượng khác và quản lý vòng đời	        | Khởi tạo bên trong __init__
+Dependency (Phụ thuộc)	| Một đối tượng phụ thuộc tạm thời vào một đối tượng khác	        | Gọi phương thức tạm thời
