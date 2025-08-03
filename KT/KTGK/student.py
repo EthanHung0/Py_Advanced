@@ -4,7 +4,7 @@ class Student():
     def __init__(self, name:str, age:int, grades:list):
         self._name = name
         self.age = age
-        self.grades = grades
+        self.grades = grades #list of float values
         self._avgrade = "N/A"
         self._performance = "N/A"
 
@@ -19,8 +19,10 @@ class Student():
     def age(self,val):
         try:
             val = int(val)
+            if val<0:
+                raise ValueError("Tuổi không hợp lệ. (Không được âm)")
         except ValueError:
-            raise ValueError("Tuổi không hợp lệ (Số nguyên).")
+            raise ValueError("Tuổi không hợp lệ. (Nhập số nguyên)")
         self._age = val
 
     @property
@@ -43,15 +45,15 @@ class Student():
 
 
     def calculate_average(self):
-        total = 0
-        for i in self.grades:
-            total += i
+        total = sum(self.grades)
         self._avgrade = total/len(self.grades)
-        return self._avgrade
+        return round(self._avgrade,2)
+
 
     def get_academic_performance(self):
         if self._avgrade == "N/A":
             self.calculate_average()
+
         if 0 <= self.avgrade < 5:
             self._performance = "Yếu"
         elif self._avgrade < 6.5:
