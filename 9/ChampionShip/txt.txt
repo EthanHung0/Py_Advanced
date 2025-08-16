@@ -27,8 +27,11 @@ T3-> Time:
   - The toString() method in the Time class returns the race time in the format "hour:minute:second.millisecond".
   - In the GP class, the getGPRanking() method returns the list of drivers who participated in this Grand Prix race in ascending order of completion time.
 
+#####################################################################################################################################
+
 T4-> Order:
-  - The getPosition() method in the GP class returns the position (how many positions) the driver took at this Grand Prix. The method accepts a Driver object.
+  - The getPosition() method in the GP class returns the position (how many positions) the driver took at this Grand Prix.
+  The method accepts a Driver object.
   - In the Driver class, you can find out which Grand Prix this driver participated in through the getRaced() method.
   - Through the Driver object, it is possible to find out how many points he scored in the Grand Prix. The scores will be as follows:
     Place | Points
@@ -43,4 +46,5 @@ T4-> Order:
       9   |    2
      10   |    1
   - The getPoints() method in the Driver class returns the number of points the driver has scored in races.
-  - In the Championship class, the getChampionshipRanking() method returns a list of drivers in descending order of the points scored by the drivers in the races.
+  - In the Championship class, the getChampionshipRanking() method returns a list of drivers in descending order of
+                                                                              the points scored by the drivers in the races.
