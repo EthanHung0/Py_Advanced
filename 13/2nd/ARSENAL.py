@@ -33,6 +33,7 @@ class Arsenal:
                 print("There are no available equipments in that category.")
                 return False
         print()
+        return True
 
 
     def useOne(self):
