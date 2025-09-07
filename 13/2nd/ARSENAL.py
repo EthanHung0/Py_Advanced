@@ -1,4 +1,4 @@
-from Classes import Gun, Tank, Airstrike, Equipment, OutOfAmmoError
+from Classes import Gun, Tank, Airstrike, Equipment
 
 
 class Arsenal:

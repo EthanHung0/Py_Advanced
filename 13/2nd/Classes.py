@@ -47,6 +47,9 @@ class Equipment(ABC):
     def display_info(self) -> str:
         pass
 
+
+
+
 #==================================================================================
 
 class Gun(Equipment):
@@ -88,8 +91,7 @@ class Gun(Equipment):
     def display_info(self) -> str:
         return f"Name: {self._name} | Weight: {self._weight} | Effective Range: {self._effective_range} | Power: {self._power}\n Remaining ammos: {self._ammo}"
 
-#--------------------------------------
-
+#-----------------------------------------------------------
 class Tank(Equipment):
     def __init__(self, name:str, weight:float, effective_range:float, power:float, armor:str):
         super().__init__(name, weight, effective_range, power)
