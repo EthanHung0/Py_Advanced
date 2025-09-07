@@ -1,10 +1,5 @@
 from abc import ABC,abstractmethod
 
-
-class OutOfAmmoError(Exception):
-    def __init__(self, type:str):
-        super().__init__(f"Out of {type}.")
-
         #Abstract class
 class Equipment(ABC):
     def __init__(self, name:str, weight:float, effective_range:float, power:float):
@@ -45,7 +40,7 @@ class Equipment(ABC):
         except ValueError: raise ValueError("Power value must be a <float> value.")
 
     @abstractmethod
-    def use(self):
+    def use(self, amount:None):
         pass
 
     @abstractmethod
@@ -72,21 +67,21 @@ class Gun(Equipment):
         except ValueError: raise ValueError("Ammo must be an <int> value.")
 
 
-    def use(self, ammo):
+    def use(self, amount:None):
         try:
             if self._ammo == 0:
                 raise ValueError("Out of ammunition.")
 
-            ammo = int(ammo)
-            if ammo <= 0:
+            amount = int(amount)
+            if amount <= 0:
                 raise ValueError("Atleast one round must be fired.")
 
-            remaining = self._ammo - ammo
+            remaining = self._ammo - amount
             if remaining < 0:
-                ammo = self._ammo
-            self._ammo -= ammo
+                amount = self._ammo
+            self._ammo -= amount
 
-            print(f"Fired {ammo} rounds, {self._ammo} remaining." if self._ammo != 0 else f"Mag dumped ({ammo} rounds fired). 0 rounds remaining.")
+            print(f"Fired {amount} rounds, {self._ammo} remaining." if self._ammo != 0 else f"Mag dumped ({amount} rounds fired). 0 rounds remaining.")
         except ValueError: raise ValueError("Firing rounds must be an <int> value")
 
 
@@ -98,12 +93,12 @@ class Gun(Equipment):
 class Tank(Equipment):
     def __init__(self, name:str, weight:float, effective_range:float, power:float, armor:str):
         super().__init__(name, weight, effective_range, power)
-        self.armor = armor
+        self._armor = armor
 
-    def use(self):
+    def use(self,amount:None):
         print("Up! Shots fired! On the way!")
 
-    def display_info(self,amount:None) -> str:
+    def display_info(self) -> str:
         return f"Name: {self._name} | Weight: {self._weight} | Effective Range: {self._effective_range} | Power: {self._power}\n Armor: {self._armor}"
 
 #-----------------------------------------------------------
@@ -123,10 +118,10 @@ class Airstrike(Equipment):
             if value < 0:
                 raise ValueError("Payload musn't be lower than 0.")
             self._payload = value
-        except ValueError: raise ValueError("payload must be an <int> value.")
+        except ValueError: raise ValueError("Payload must be an <int> value.")
 
 
-    def _missle_call(self,count) -> str:
+    def _missile_call(self,count) -> str:
         if count == 1: return "Single"
         elif count == 2: return "Pair"
         elif 3 <= count <= 4: return "Salvo"
@@ -134,22 +129,22 @@ class Airstrike(Equipment):
         elif 7 <= count <= 9: return "Barrage"
         else: return "Full Payload"
 
-    def use(self, load):
+    def use(self, amount:None):
         if self._payload == 0:
-            raise ValueError("Out of missles.")
+            raise ValueError("Out of missiles.")
         try:
-            load = int(load)
-            if load <= 0:
-                raise ValueError("Atleast one missle must be fired.")
+            amount = int(amount)
+            if amount <= 0:
+                raise ValueError("Atleast one missile must be fired.")
 
-            remaining = self._payload - load
+            remaining = self._payload - amount
             if remaining < 0:
-                load = self._payload
+                amount = self._payload
 
-            self._payload -= load
-            print(f"Fired {self._missle_call(load)} ({load} missle{'s' if load > 1 else ''}), {self._payload} remaining.")
+            self._payload -= amount
+            print(f"Fired {self._missile_call(amount)} ({amount} missile{'s' if amount > 1 else ''}), {self._payload} remaining.")
         except ValueError: raise ValueError("Firing load must be an <int> value.")
 
 
     def display_info(self) -> str:
-        return f"Name: {self._name} | Weight: {self._weight} | Effective Range: {self._effective_range} | Power: {self._power}\n Current payload: {self._ammo}"
+        return f"Name: {self._name} | Weight: {self._weight} | Effective Range: {self._effective_range} | Power: {self._power}\n Current payload: {self._payload}"

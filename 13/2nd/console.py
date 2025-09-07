@@ -33,7 +33,7 @@ def main():
                     armor = input("Input tank's armor type: ")
                     system.addArsenal(Tank(name,weight,effective_range,power,armor))
                 elif equipment_type == "airstrike":
-                    payload = input("Input airstrike's current payload (missles): ")
+                    payload = input("Input airstrike's current payload (missiles): ")
                     system.addArsenal(Airstrike(name,weight,effective_range,power,payload))
                 else: raise ValueError(f"Equipment type <{equipment_type}> not available.")
 

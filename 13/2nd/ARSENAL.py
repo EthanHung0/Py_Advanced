@@ -3,16 +3,16 @@ from Classes import Gun, Tank, Airstrike, Equipment, OutOfAmmoError
 
 class Arsenal:
     def __init__(self):
-        self._arsenal = {"Guns":[], "Tanks":[], "Airtrikes":[]}
+        self._arsenal = {"Gun":[], "Tank":[], "Airstrike":[]}
 
 
     def addArsenal(self, equipment:Equipment):
         if isinstance(equipment,Gun):
-            self._arsenal["Guns"].append(equipment)
+            self._arsenal["Gun"].append(equipment)
         elif isinstance(equipment,Tank):
-            self._arsenal["Tanks"].append(equipment)
+            self._arsenal["Tank"].append(equipment)
         elif isinstance(equipment,Airstrike):
-            self._arsenal["Airstrikes"].append(equipment)
+            self._arsenal["Airstrike"].append(equipment)
 
 
     def Present(self,equipment_type) -> bool:
@@ -27,7 +27,7 @@ class Arsenal:
         else:
             print(f"\n========== {equipment_type} ==========")
             if self._arsenal[f"{equipment_type}"]:
-                for i,a in enumerate(self._arsenal[f"{equipment_type}"]):
+                for i,a in enumerate(self._arsenal[f"{equipment_type}"],1):
                     print(f"{i}. {a.display_info()}")
             else:
                 print("There are no available equipments in that category.")
@@ -51,7 +51,7 @@ class Arsenal:
         if choice not in range(1,len(unit)+1):
             raise ValueError("Equipment not found.")
 
-        equipment = unit[choice+1]
+        equipment = unit[choice-1]
         if isinstance(equipment,Gun) or isinstance(equipment,Airstrike):
-            amount = input("Input amount of firing rounds (bullets): " if isinstance(equipment,Gun) else "Input amount of firing load (missles): ")
+            amount = input("Input amount of firing rounds (bullets): " if isinstance(equipment,Gun) else "Input amount of firing load (missiles): ")
         equipment.use(amount)
