@@ -79,6 +79,7 @@ class Gun(Equipment):
             if amount <= 0:
                 raise ValueError("Atleast one round must be fired.")
 
+            # Mag dump if firing amount is higher than remaining ammos.
             remaining = self._ammo - amount
             if remaining < 0:
                 amount = self._ammo
