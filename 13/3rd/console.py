@@ -1,5 +1,4 @@
 from ROOMS import Standard, VIP, ConferenceRoom
-from CUSTOMER import Customer
 from HOTEL import Main_Hotel
 
 
