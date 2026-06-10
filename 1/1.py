@@ -1,54 +1,54 @@
 #=========================================================================================
 ##BAI1:
-# class SinhVien:
+class SinhVien:
 
-#     def __init__(self,ten,ma_so,lop,diem_tb):
-#         self.ten = ten
-#         self.ma_so = ma_so
-#         self.lop = lop
-#         self.diem_tb = diem_tb
-#         if self.diem_tb>10 or self.diem_tb<0:
-#             print("Điểm trung bình không hợp lệ.")
+    def __init__(self,ten,ma_so,lop,diem_tb):
+        self.ten = ten
+        self.ma_so = ma_so
+        self.lop = lop
+        self.diem_tb = diem_tb
+        if self.diem_tb>10 or self.diem_tb<0:
+            print("Điểm trung bình không hợp lệ.")
 
-#     def in_thong_tin(self):
-#         print(f"""
-# Tên: {self.ten}
-# Mã số sinh viên: {self.ma_so}
-# Lớp: {self.lop}
-# Điểm trung bình: {self.diem_tb}
-# """)
+    def in_thong_tin(self):
+        print(f"""
+Tên: {self.ten}
+Mã số sinh viên: {self.ma_so}
+Lớp: {self.lop}
+Điểm trung bình: {self.diem_tb}
+""")
 
-#     def xep_loai(self):
-#         if 0<=self.diem_tb<5:
-#             ranking = "Yếu"
-#         elif self.diem_tb<6.5:
-#             ranking = "TB"
-#         elif self.diem_tb<8:
-#             ranking = "Khá"
-#         else:
-#             ranking = "Giỏi"
-#         print(f"Học sinh {ranking}")
+    def xep_loai(self):
+        if 0<=self.diem_tb<5:
+            ranking = "Yếu"
+        elif self.diem_tb<6.5:
+            ranking = "TB"
+        elif self.diem_tb<8:
+            ranking = "Khá"
+        else:
+            ranking = "Giỏi"
+        print(f"Học sinh {ranking}")
 
-#     def cap_nhat_diem(self,new):
-#         if new>10 or new<0:
-#             print("Điểm trung bình mới không hợp lệ.")
-#         else:
-#             self.diem_tb = new
-#             print("\n\n-Điểm đã được thay đổi")
+    def cap_nhat_diem(self,new):
+        if new>10 or new<0:
+            print("Điểm trung bình mới không hợp lệ.")
+        else:
+            self.diem_tb = new
+            print("\n\n-Điểm đã được thay đổi")
 
-# sv1 = SinhVien("Minh Hùng","001","A1",5.5)
-# sv2 = SinhVien("Thanh Long","002","A2",8.4)
-# sv3 = SinhVien("Tiến Anh","003","A3",7.6)
+sv1 = SinhVien("Minh Hùng","001","A1",5.5)
+sv2 = SinhVien("Thanh Long","002","A2",8.4)
+sv3 = SinhVien("Tiến Anh","003","A3",7.6)
 
-# def there():
-#     for i in [sv1,sv2,sv3]:
-#         print("==============================")
-#         i.in_thong_tin()
-#         i.xep_loai()
-# there()
+def there():
+    for i in [sv1,sv2,sv3]:
+        print("==============================")
+        i.in_thong_tin()
+        i.xep_loai()
+there()
 
-# sv1.cap_nhat_diem(8)
-# there()
+sv1.cap_nhat_diem(8)
+there()
 
 
 #=========================================================================================
